@@ -1,10 +1,9 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-const http = require('http');
 const url = require('url');
 
 
-const requestListener = async function (req, res) {
+export default async function handler(req, res) {
   const queryObject = url.parse(req.url, true).query;
 
   if (queryObject.id) {
@@ -35,6 +34,3 @@ const requestListener = async function (req, res) {
     }
   }
 }
-
-const server = http.createServer(requestListener);
-server.listen(80);
